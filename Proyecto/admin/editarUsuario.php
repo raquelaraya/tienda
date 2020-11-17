@@ -1,8 +1,7 @@
 <?php
     include 'conexionBD.php';
     $abirCon = OpenCon();
-
-   
+    
 
     if(isset($_REQUEST['btnEditar'])){
        
@@ -24,8 +23,25 @@
         $res3= mysqli_query($abirCon,$query);
         if($res3){
             
+            echo "<script> swal({
+                title: 'Atención',
+                text: '¡Se modifico correctamente!',
+                type: 'success',
+                showCancelButton: false,
+        
+                confirmButtonColor: 'green',
+                confirmButtonText: 'Ok',
+                closeOnConfirm: true
+            },
+
+                function (isConfirm) {
+                    window.location.href = 'panelAdmin.php?modulo=usuarios';
+      
+                }
+            ); </script>";
+            
             //echo '<meta http-equiv="refresh" content="0; url=panelAdmin.php?modulo=usuarios&mensaje=Usuario '.$nombre.' editado exitosamente" />  ';
-            echo "<script>alert('Usuario editado exitosamente');</script>";
+ 
         }
         else{
 ?>
@@ -37,10 +53,12 @@
 <?php
         }
     }
+
     $id= mysqli_real_escape_string($abirCon,$_REQUEST['id']);
     $query1="SELECT IdUsuario, CedulaUsuario, NombreUsuario, ApellidoUsuario, correoUsuario, passwordUsuario, direccionUsuario, telefonoUsuario,idRol from usuario WHERE IdUsuario='".$id."'";
     $res= mysqli_query($abirCon,$query1);
     $row= mysqli_fetch_assoc($res);
+   
           
         
         
@@ -66,7 +84,7 @@
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                <form action="panelAdmin.php?modulo=editarUsuario" method="post">
+                <form action="panelAdmin.php?modulo=editarUsuario&id=<?php echo $row['IdUsuario'] ?>" method="post">
                     <div class="row">
                         <div class="form-group col-md-4">
                             <input type="text" class="form-control" placeholder="Cedula" name="txtCedula" id="txtCedula" disabled="true" value="<?php echo $row['CedulaUsuario'] ?>">
@@ -173,3 +191,15 @@
     </section>
     <!-- /.content -->
   </div>
+
+  <script>
+      function notiUsuarioAgregado(){
+          console.log("AAAAAA");
+        swal(
+            'Good job!',
+            'You clicked the button!',
+            'success'
+        );
+      }
+
+  </script>

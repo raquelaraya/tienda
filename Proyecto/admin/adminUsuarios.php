@@ -1,4 +1,45 @@
-  <!-- Content Wrapper. Contains page content TABLA DE ADMINISTRACION DE USUARIOS-->
+  <?php
+    include 'conexionBD.php';
+    $abirCon = OpenCon();
+    if(isset($_REQUEST['idBorrar'])){
+      echo "<script>      swal({
+        title: 'Atención',
+        text: '¡Desea modificar el teléfono?',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        confirmButtonColor: '#DD6B55',
+        confirmButtonText: 'Sí',
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+
+        function (isConfirm) {
+            if (isConfirm) {";
+            $id= mysqli_real_escape_string($abirCon,$_REQUEST['idBorrar']);
+            $query2="DELETE FROM usuario WHERE IdUsuario = '".$id."'";
+            $res2=mysqli_query($abirCon,$query2);
+            echo "window.location.href = 'panelAdmin.php?modulo=usuarios';
+            
+            }
+            
+        }
+      );
+</script>";
+
+
+    }
+    
+  ?>
+
+
+<?php
+function Eliminar(){  
+  $abirCon = OpenCon();
+            $id= mysqli_real_escape_string($abirCon,$_REQUEST['idBorrar']);
+            $query2="DELETE FROM usuario WHERE IdUsuario = '".$id."'";
+            $res2=mysqli_query($abirCon,$query2);}?>
+  <!--Content Wrapper. Contains page content TABLA DE ADMINISTRACION DE USUARIOS-->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -36,7 +77,7 @@
                   </thead>
                 <tbody>
                     <?php
-                        include 'conexionBD.php';
+                        //include 'conexionBD.php';
                         $query="SELECT IdUsuario,CedulaUsuario, NombreUsuario,ApellidoUsuario, correoUsuario, direccionUsuario, telefonoUsuario, rol.NombreRol FROM usuario INNER JOIN rol on usuario.idRol = rol.IdRol";
                         $abirCon = OpenCon();
                         $res= mysqli_query($abirCon,$query);
@@ -53,7 +94,7 @@
                             <td><?php echo $row['NombreRol'] ?></td>
                             <td>
                                 <a href="panelAdmin.php?modulo=editarUsuario&id=<?php echo $row['IdUsuario'] ?>"><i class="fas fa-edit"></i></a>
-                                <a href="eliminarUsuario.php?idBorrar=<?php echo $row['IdUsuario'] ?>" class="text-danger"><i class="fas fa-trash"></i></a>
+                                <a href="#" class="text-danger "><i onclick="Eliminar(<?php echo $row['IdUsuario'] ?>)" class="fas fa-trash"></i></a>
                             </td>.
                             
                         </tr>
@@ -77,3 +118,31 @@
     </section>
     <!-- /.content -->
   </div>
+  <script>
+    function Eliminar(id){
+
+      swal({
+        title: 'Atención',
+        text: '¡Desea eliminar el usuario!',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        confirmButtonColor: 'red',
+        confirmButtonText: 'Sí',
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+
+        function (isConfirm) {
+            if (isConfirm) {
+              
+            window.location.href = "panelAdmin.php?modulo=eliminarUsuario&idBorrar="+id;
+            
+            }
+            
+        }
+      );
+
+    }
+
+    </script>

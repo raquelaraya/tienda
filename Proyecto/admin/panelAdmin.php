@@ -2,10 +2,16 @@
 <html>
 <?php
   session_start();
+  if(isset($_REQUEST['sesion'])&& $_REQUEST['sesion']=="cerrar"){
+    session_destroy();
+    header("location: index.php");
+  }
   if(isset($_SESSION['idUsuario'])==false){
     header("location: index.php");
   }
   $modulo=$_REQUEST['modulo']??'';
+
+  
 ?>
 <head>
   <meta charset="utf-8">
@@ -38,6 +44,9 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
    <!-- icheck bootstrap -->
    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -58,6 +67,9 @@
       
         <a class="nav-link"  href="miPerfil.php">
           <i class="far fa-user"></i>
+        </a>
+        <a class="nav-link"  href="panelAdmin.php?modulo=&sesion=cerrar" title="Cerrar Sesión">
+          <i class="fas fa-door-closed"></i>
         </a>
       
     </ul>
@@ -115,7 +127,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="panelAdmin.php?modulo=proveedores" class="nav-link <?php echo ($modulo=="proveedores")? " active":" "?>">
+                <a href="panelAdmin.php?modulo=proveedor" class="nav-link <?php echo ($modulo=="proveedor"||  $modulo=="editarProveedor" || $modulo=="crearProveedor" )? " active":" "?>">
                   <i class="fa fa-address-card nav-icon"></i>
                   <p>Proveedores</p>
                 </a>
@@ -154,7 +166,7 @@
     if($modulo=="productos"){
       include "adminProductos.php";
     }
-    if($modulo=="proveedores"){
+    if($modulo=="proveedor"){
       include "adminProveedores.php";
     }
     if($modulo=="ventas"){
@@ -166,8 +178,18 @@
     if($modulo=="editarUsuario"){
       include "editarUsuario.php";
     }
-
-    
+    if($modulo=="eliminarUsuario"){
+      include "eliminarUsuario.php";
+    }
+    if($modulo=="editarProveedor"){
+      include "editarProveedor.php";
+    }
+    if($modulo=="crearProveedor"){
+      include "crearProveedor.php";
+    }
+    if($modulo=="eliminarProveedor"){
+      include "eliminarProveedor.php";
+    }
   ?>
 </div>
 <!-- ./wrapper -->
