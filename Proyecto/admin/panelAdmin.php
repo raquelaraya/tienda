@@ -111,15 +111,10 @@
               <li class="nav-item">
                 <a href="panelAdmin.php?modulo=dashboard" class="nav-link <?php echo ($modulo=="dashboard" || $modulo=="" )?" active ":" "?>">
                   <i class="fas fa-tachometer-alt nav-icon"></i>
-                  <p>Dashboard</p>
+                  <p>Principal</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="panelAdmin.php?modulo=usuarios" class="nav-link <?php echo ($modulo=="usuarios" || $modulo=="crearUsuario" ||  $modulo=="editarUsuario")?" active":" ";?>">
-                  <i class="fa fa-users nav-icon"></i>
-                  <p>Usuarios</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="panelAdmin.php?modulo=productos" class="nav-link <?php echo ($modulo=="productos")? " active":" "?>">
                   <i class="fa fa-shopping-bag nav-icon"></i>
@@ -138,6 +133,22 @@
                   <p>Ventas</p>
                 </a>
               </li>
+
+          <li class="nav-item">
+                <a href="panelAdmin.php?modulo=usuarios" class="nav-link <?php echo ($modulo=="usuarios" || $modulo=="crearUsuario" ||  $modulo=="editarUsuario")?" active":" ";?>">
+                  <i class="fa fa-users nav-icon"></i>
+                  <p>Usuarios</p>
+                </a>
+              </li>
+
+               <li class="nav-item">
+               <a href="panelAdmin.php?modulo=proveedores" class="nav-link <?php echo ($modulo=="proveedores")? " active":" "?> ">
+                  <i class="fab fa-black-tie"></i>
+                  <p>Proveedores</p>
+                </a>
+              </li>
+
+
            </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -160,17 +171,19 @@
     if($modulo=="dashboard" || $modulo==""){
       include "dashboard.php";
     }
-    if($modulo=="usuarios"){
-      include "adminUsuarios.php";
-    }
+   
     if($modulo=="productos"){
       include "adminProductos.php";
     }
     if($modulo=="proveedor"){
       include "adminProveedores.php";
     }
+    
     if($modulo=="ventas"){
-      include "adminVentas.php";
+      include "ventas.php";
+    }
+    if($modulo=="usuarios"){
+      include "adminUsuarios.php";
     }
     if($modulo=="crearUsuario"){
       include "crearUsuario.php";
