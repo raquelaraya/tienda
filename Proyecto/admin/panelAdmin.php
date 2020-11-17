@@ -197,6 +197,9 @@
     if($modulo=="eliminarProveedor"){
       include "eliminarProveedor.php";
     }
+    if($modulo=="agregarProductos"){
+      include "agregarProductos.php";
+    }
   ?>
 </div>
 <!-- ./wrapper -->
