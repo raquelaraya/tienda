@@ -99,33 +99,39 @@
               <li class="nav-item">
                 <a href="panelAdmin.php?modulo=dashboard" class="nav-link <?php echo ($modulo=="dashboard" || $modulo=="" )?" active ":" "?>">
                   <i class="fas fa-tachometer-alt nav-icon"></i>
-                  <p>Dashboard</p>
+                  <p>Principal</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="panelAdmin.php?modulo=usuarios" class="nav-link <?php echo ($modulo=="usuarios" || $modulo=="crearUsuario" ||  $modulo=="editarUsuario")?" active":" ";?>">
-                  <i class="fa fa-users nav-icon"></i>
-                  <p>Usuarios</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="panelAdmin.php?modulo=productos" class="nav-link <?php echo ($modulo=="productos")? " active":" "?>">
                   <i class="fa fa-shopping-bag nav-icon"></i>
                   <p>Productos</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="panelAdmin.php?modulo=proveedores" class="nav-link <?php echo ($modulo=="proveedores")? " active":" "?>">
-                  <i class="fa fa-address-card nav-icon"></i>
-                  <p>Proveedores</p>
-                </a>
-              </li>
+              
               <li class="nav-item">
                 <a href="panelAdmin.php?modulo=ventas" class="nav-link <?php echo ($modulo=="ventas")? " active":" "?> ">
                   <i class="fa fa-shopping-cart nav-icon"></i>
                   <p>Ventas</p>
                 </a>
               </li>
+
+          <li class="nav-item">
+                <a href="panelAdmin.php?modulo=usuarios" class="nav-link <?php echo ($modulo=="usuarios" || $modulo=="crearUsuario" ||  $modulo=="editarUsuario")?" active":" ";?>">
+                  <i class="fa fa-users nav-icon"></i>
+                  <p>Usuarios</p>
+                </a>
+              </li>
+
+               <li class="nav-item">
+               <a href="panelAdmin.php?modulo=proveedores" class="nav-link <?php echo ($modulo=="proveedores")? " active":" "?> ">
+                  <i class="fab fa-black-tie"></i>
+                  <p>Proveedores</p>
+                </a>
+              </li>
+
+
            </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -148,17 +154,16 @@
     if($modulo=="dashboard" || $modulo==""){
       include "dashboard.php";
     }
+   
+    if($modulo=="productos"){
+      include "productos.php";
+    }
+    
+    if($modulo=="ventas"){
+      include "ventas.php";
+    }
     if($modulo=="usuarios"){
       include "adminUsuarios.php";
-    }
-    if($modulo=="productos"){
-      include "adminProductos.php";
-    }
-    if($modulo=="proveedores"){
-      include "adminProveedores.php";
-    }
-    if($modulo=="ventas"){
-      include "adminVentas.php";
     }
     if($modulo=="crearUsuario"){
       include "crearUsuario.php";
@@ -166,6 +171,11 @@
     if($modulo=="editarUsuario"){
       include "editarUsuario.php";
     }
+    if($modulo=="proveedores"){
+      include "proveedores.php";
+    }
+    
+   
 
     
   ?>

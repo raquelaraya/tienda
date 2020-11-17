@@ -24,7 +24,6 @@
         $res3= mysqli_query($abirCon,$query);
         if($res3){
             
-            //echo '<meta http-equiv="refresh" content="0; url=panelAdmin.php?modulo=usuarios&mensaje=Usuario '.$nombre.' editado exitosamente" />  ';
             echo "<script>alert('Usuario editado exitosamente');</script>";
         }
         else{

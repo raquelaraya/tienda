@@ -53,7 +53,7 @@
                             <td><?php echo $row['NombreRol'] ?></td>
                             <td>
                                 <a href="panelAdmin.php?modulo=editarUsuario&id=<?php echo $row['IdUsuario'] ?>"><i class="fas fa-edit"></i></a>
-                                <a href="eliminarUsuario.php?idBorrar=<?php echo $row['IdUsuario'] ?>" class="text-danger"><i class="fas fa-trash"></i></a>
+                                 <a href="panelAdmin.php?modulo=editarUsuario&id=<?php echo $row['IdUsuario'] ?>" class="text-danger"><i class="fas fa-trash"></i></a>
                             </td>.
                             
                         </tr>
