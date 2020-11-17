@@ -141,12 +141,6 @@
                 </a>
               </li>
 
-               <li class="nav-item">
-               <a href="panelAdmin.php?modulo=proveedores" class="nav-link <?php echo ($modulo=="proveedores")? " active":" "?> ">
-                  <i class="fab fa-black-tie"></i>
-                  <p>Proveedores</p>
-                </a>
-              </li>
 
 
            </ul>
