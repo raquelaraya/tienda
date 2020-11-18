@@ -172,7 +172,6 @@
     if($modulo=="proveedor"){
       include "adminProveedores.php";
     }
-    
     if($modulo=="ventas"){
       include "ventas.php";
     }

@@ -2,8 +2,13 @@
 <html>
 <?php
   session_start();
+  if(isset($_REQUEST['sesion'])&& $_REQUEST['sesion']=="cerrar"){
+		session_destroy();
+		header("location: index.php");
+  }
+  
   if(isset($_SESSION['idUsuario'])==false){
-    header("location:index2.php");
+    header("location: index.php");
   }
   $modulos=$_REQUEST['modulo']??'';
 ?>

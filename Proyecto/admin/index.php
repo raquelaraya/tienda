@@ -98,7 +98,7 @@
 
       <p class="mb-0">
         </br>
-        <a href="register.html" class="text-center">Quiero registrarme</a>
+        <a href="registroUsuario.php" class="text-center">Quiero registrarme</a>
       </p>
     </div>
     <!-- /.login-card-body -->
