@@ -1,35 +1,57 @@
 <?php
-    if(isset($_REQUEST['btnRegistrar'])){
+    
+    
+    if(isset($_REQUEST['btnAgregar'])){
         include 'conexionBD.php';
         $abirCon = OpenCon();
 
-        $ID= $_REQUEST['txtProducto'];
-        $Nombre= $_REQUEST['txtNombre'];
-        $Cantidad= $_REQUEST['txtCantidad'];
-        $Precio= $_REQUEST['txtPrecio'];
-        $IDProv= $_REQUEST['txtIDProveedor'];
-        $IDEstado= $_REQUEST['txtIDEstado'];
-        $IDCat= $_REQUEST['txtIDCatP'];
-        $Imagen= addslashes(file_get_contents($FILES['IMG']['tmp_name']));
+        $IDProducto = $_REQUEST['txtProducto'];
+        $Nombre = $_REQUEST['txtNombre'];
+        $Cantidad = $_REQUEST['txtCantidad'];
+        $Precio =  $_REQUEST['txtPrecio'];
+        $IDProv = $_REQUEST['txtIDProveedor'];
+        $IdEstadoProd = $_REQUEST['txtIDEstado'];
+        $IdCategoriaProd = $_REQUEST['txtIDCatP'];
+        $Img =  addslashes(file_get_contents($_FILES['IMG']['tmp_name']));
 
-        $query=
-        "INSERT INTO producto ('IdProducto',NombreProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,
-        IdCategoriaProducto,Imagen) 
-        VALUES('".$ID."','".$Nombre."','".$Cantidad."','".$Precio."','".$IDProv."','".$IDEstado."','".$IDCat."','".$Imagen."')";
 
+       
+        $query="INSERT INTO producto (IdProducto, NombreProducto,CantidadProducto,PrecioUnitario,IdEstadoProducto,IdCategoriaProducto,Imagen) 
+        VALUES ('".$IDProducto."', '".$Nombre."','".$Cantidad."','".$Precio."','". $IdEstadoProd."','". $IdCategoriaProd."','".$Img."')";
         $res= mysqli_query($abirCon,$query);
         if($res){
-            echo '<meta http-equiv="refresh" content="0; url=panelAdmin.php?modulo=productos&mensaje=Producto agregado exitosamente" />  ';
-        }else{
-            ?>
+
+            echo "<script> swal({
+                title: 'Atención',
+                text: '¡Se agrego el producto!',
+                type: 'success',
+                showCancelButton: false,
+        
+                confirmButtonColor: 'green',
+                confirmButtonText: 'Ok',
+                closeOnConfirm: true
+            },
+
+                function (isConfirm) {
+                    window.location.href = 'panelAdmin.php?modulo=productos';
+      
+                }
+            ); </script>";
+            
+        }
+        else{
+    ?>
         <div class="alert alert-danger" role="alert">
-            Error al agregar el producto <?php echo mysqli_error($abirCon); ?>
+            Error al agregar el proveedor <?php echo mysqli_error($abirCon); ?>
         </div>
         <?php
             }
-    }
- ?>
-<!-- Content Wrapper. Contains page content TABLA DE ADMINISTRACION DE USUARIOS-->
+        }
+        ?>
+   
+
+  
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -113,7 +135,7 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                        <input type="file" class="form-control" REQUIRED placeholder="Imagen" name="IMG" id="IMG">
+                        <input type="file" class="form-control" placeholder="Imagen" name="IMG" id="IMG">
                             <div class="input-group-append">
                                 <div class="form-group col-md-6">
                                 </div>
