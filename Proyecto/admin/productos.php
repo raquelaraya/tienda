@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content TABLA DE ADMINISTRACION DE USUARIOS-->
+<!-- Content Wrapper. Contains page content-->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -38,7 +38,7 @@
                 <tbody>
                   <?php
                      include 'conexionBD.php';
-                     $query="SELECT * FROM producto";
+                     $query="SELECT IdProducto,NombreProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,IdCategoriaProducto,Imagen FROM producto";
                      $abirCon = OpenCon();
                      $res= mysqli_query($abirCon,$query);
 
