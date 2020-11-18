@@ -167,7 +167,7 @@
     }
    
     if($modulo=="productos"){
-      include "adminProductos.php";
+      include "productos.php";
     }
     if($modulo=="proveedor"){
       include "adminProveedores.php";
@@ -195,6 +195,9 @@
     }
     if($modulo=="eliminarProveedor"){
       include "eliminarProveedor.php";
+    }
+    if($modulo=="agregarProductos"){
+      include "agregarProductos.php";
     }
   ?>
 </div>
