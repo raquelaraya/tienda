@@ -1,21 +1,27 @@
- 
  <!DOCTYPE html>
 <html>
 <?php
   session_start();
   if(isset($_SESSION['idUsuario'])==false){
     header("location:index2.php");
-  }
-  $modulos=$_REQUEST['modulo']??'';
+   
+    }
+
 ?>
 
 
 <head>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta name="viewport"content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
    <title>Technosystems | Tienda</title>
   <!-- Tell the browser to be responsive to screen width -->
@@ -62,12 +68,7 @@
 
       </div>
     </div>
-
-   
-
       <nav class="mt">
-
-        
         <button class="btn btn-primary" id="menu-toggle">X</button>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,12 +83,12 @@
           </ul>
         </div>
       </nav>
-
-
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Inicio</h1>
+            <br>
+          </br>
+          <h3 class="m-0 text-dark"><a href="javascript:void();">Carrito de Compra</a></h3>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -96,17 +97,65 @@
             </ol>
           </div>
         </div>
-      </div>
-     
+        <div class="container">
    
-   
+
+<div class="container">
+<div class="panel panel-default">
+<div class="panel-heading"> 
+
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="index.php">Inicio</a></li>
+  <li role="presentation"><a href="VerCarta.php">Ver Carta</a></li>
+  <li role="presentation"><a href="Pagos.php">Pagos</a></li>
+</ul>
 </div>
+
+<div class="panel-body">
+    <h1>Mis Productos</h1>
+    <a href="VerCarta.php" class="cart-link" title="Ver Carta"><i class="glyphicon glyphicon-shopping-cart"></i></a>
+    <div id="products" class="row list-group">
+         <?php
+                     include 'conexionBD.php';
+                     $query="SELECT * FROM producto";
+                     $abirCon = OpenCon();
+                     $res= mysqli_query($abirCon,$query);
+
+                     while($row= mysqli_fetch_assoc($res)){
+                  ?>
+        <div class="item col-lg-4">
+            <div class="thumbnail">
+                <div class="caption">
+                    <h4 class="list-group-item-heading"><?php echo $row["NombreProducto"]; ?></h4>
+                    <p class="list-group-item-text"><?php echo $row["IdCategoriaProducto"]; ?></p>
+                    <img height="200px" src="data:image/jpg;base64,<?php echo base64_encode($row['Imagen']); ?>"/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="lead"><?php echo '$'.$row["PrecioUnitario"].' USD'; ?></p>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-success" href="AccionCarta.php?action=addToCart&id=<?php echo $row["id"]; ?>">Agregar a la Carta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php } T_ELSE  ?>
+        
+        
+    </div>
+        </div>
+
+
+
+
 
 
 
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="js/FuncionesSitio.js"></script>
+  
   <script>
    
     

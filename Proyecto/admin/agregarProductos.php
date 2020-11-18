@@ -12,9 +12,10 @@
         $IDCat= $_REQUEST['txtIDCatP'];
         $Imagen= addslashes(file_get_contents($FILES['IMG']['tmp_name']));
 
-        $query= "INSERT INTO producto (IdProducto,NombreProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,
-        IdCategoriaProducto,Imagen) VALUES('".$ID."','".$Nombre."','".$Cantidad."'.,'".$Precio."','".$IDProv."',
-        '".$IDEstado."','".$IDCat."','".$Imagen."')";
+        $query=
+        "INSERT INTO producto ('IdProducto',NombreProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,
+        IdCategoriaProducto,Imagen) 
+        VALUES('".$ID."','".$Nombre."','".$Cantidad."','".$Precio."','".$IDProv."','".$IDEstado."','".$IDCat."','".$Imagen."')";
 
         $res= mysqli_query($abirCon,$query);
         if($res){
