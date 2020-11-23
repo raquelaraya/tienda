@@ -116,7 +116,7 @@
               </li>
               
               <li class="nav-item">
-                <a href="panelAdmin.php?modulo=productos" class="nav-link <?php echo ($modulo=="productos")? " active":" "?>">
+                <a href="panelAdmin.php?modulo=productos" class="nav-link <?php echo ($modulo=="productos" || $modulo=="agregarProductos" || $modulo=="editarProducto")? " active":" "?>">
                   <i class="fa fa-shopping-bag nav-icon"></i>
                   <p>Productos</p>
                 </a>
@@ -198,6 +198,12 @@
     }
     if($modulo=="agregarProductos"){
       include "agregarProductos.php";
+    }
+    if($modulo=="editarProducto"){
+      include "editarProducto.php";
+    }
+    if($modulo=="eliminarProducto"){
+      include "eliminarProducto.php";
     }
   ?>
 </div>

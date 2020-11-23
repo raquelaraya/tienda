@@ -28,9 +28,8 @@
                     <th>Nombre</th>
                     <th>Cantidad</th>
                     <th>Precio Unitario</th>
-                    <th>ID Proveedor</th>
-                    <th>ID estado del producto</th>
-                    <th>ID Categoria</th>
+                    <th>Proveedor</th>
+                    <th>Estado del producto</th>
                     <th>Imagen del producto</th>
                     <th>Acciones</th>
                     </tr>          
@@ -38,7 +37,7 @@
                 <tbody>
                   <?php
                      include 'conexionBD.php';
-                     $query="SELECT IdProducto,NombreProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,IdCategoriaProducto,Imagen FROM producto";
+                     $query="SELECT IdProducto,NombreProducto,CantidadProducto,PrecioUnitario,proveedor.NombreProveedor,estadoproducto.NombreEstado,Imagen FROM producto INNER JOIN proveedor on producto.IdProveedor = proveedor.IdProveedor INNER JOIN estadoproducto on producto.IdEstadoProducto = estadoproducto.IdEstado";
                      $abirCon = OpenCon();
                      $res= mysqli_query($abirCon,$query);
 
@@ -49,13 +48,13 @@
                         <td><?php echo $row['NombreProducto'] ?></td>
                         <td><?php echo $row['CantidadProducto'] ?></td>
                         <td><?php echo $row['PrecioUnitario'] ?></td>
-                        <td><?php echo $row['IdProveedor'] ?></td>
-                        <td><?php echo $row['IdEstadoProducto'] ?></td>
-                        <td><?php echo $row['IdCategoriaProducto'] ?></td>
+                        <td><?php echo $row['NombreProveedor'] ?></td>
+                        <td><?php echo $row['NombreEstado'] ?></td>
+                        
                         <td><img height="200px" src="data:image/jpg;base64,<?php echo base64_encode($row['Imagen']); ?>"/></td>
                         <td>
-                                <a href="#"><i class="fas fa-edit"></i></a>
-                                 <a href="#" class="text-danger"><i class="fas fa-trash"></i></a>
+                                <a href="panelAdmin.php?modulo=editarProducto&id=<?php echo $row['IdProducto'] ?>"><i class="fas fa-edit"></i></a>
+                                 <a href="#" class="text-danger"><i onclick="Eliminar(<?php echo $row['IdProducto'] ?>)" class="fas fa-trash"></i></a>
                             </td>
                       </tr>
                   <?php
@@ -70,3 +69,31 @@
       </div>
     </section>
   </div>
+  <script>
+    function Eliminar(id){
+
+      swal({
+        title: 'Atención',
+        text: '¡Desea eliminar el producto!',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        confirmButtonColor: 'red',
+        confirmButtonText: 'Sí',
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+
+        function (isConfirm) {
+            if (isConfirm) {
+              
+            window.location.href = "panelAdmin.php?modulo=eliminarProducto&idBorrar="+id;
+            
+            }
+            
+        }
+      );
+
+    }
+
+    </script>

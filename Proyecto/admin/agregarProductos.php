@@ -3,22 +3,18 @@
     
     if(isset($_REQUEST['btnAgregar'])){
         include 'conexionBD.php';
-        $abirCon = OpenCon();
+        $abrirCon = OpenCon();
 
-        $IDProducto = $_REQUEST['txtProducto'];
         $Nombre = $_REQUEST['txtNombre'];
         $Cantidad = $_REQUEST['txtCantidad'];
         $Precio =  $_REQUEST['txtPrecio'];
-        $IDProv = $_REQUEST['txtIDProveedor'];
-        $IdEstadoProd = $_REQUEST['txtIDEstado'];
-        $IdCategoriaProd = $_REQUEST['txtIDCatP'];
+        $IDProv = $_REQUEST['cboProveedor'];
+        $IdEstadoProd = $_REQUEST['cboEstado'];
         $Img =  addslashes(file_get_contents($_FILES['IMG']['tmp_name']));
 
-
-       
-        $query="INSERT INTO producto (IdProducto, NombreProducto,CantidadProducto,PrecioUnitario,IdEstadoProducto,IdCategoriaProducto,Imagen) 
-        VALUES ('".$IDProducto."', '".$Nombre."','".$Cantidad."','".$Precio."','". $IdEstadoProd."','". $IdCategoriaProd."','".$Img."')";
-        $res= mysqli_query($abirCon,$query);
+        $query="INSERT INTO producto (NombreProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,Imagen) 
+        VALUES ('".$Nombre."','".$Cantidad."','".$Precio."','". $IDProv."','". $IdEstadoProd."','".$Img."')";
+        $res= mysqli_query($abrirCon,$query);
         if($res){
 
             echo "<script> swal({
@@ -42,7 +38,7 @@
         else{
     ?>
         <div class="alert alert-danger" role="alert">
-            Error al agregar el proveedor <?php echo mysqli_error($abirCon); ?>
+            Error al agregar el producto <?php echo mysqli_error($abrirCon); ?>
         </div>
         <?php
             }
@@ -74,14 +70,7 @@
               <div class="card-body">
               <form action="panelAdmin.php?modulo=agregarProductos" method="post" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="form-group col-md-4">
-                        <input type="number" class="form-control" placeholder="ID del producto" name="txtProducto" id="txtProducto">
-                            <div class="input-group-append">
-                                <div class="form-group col-md-6">
-                                </div>
-                            </div>
-                    </div>
-
+                
                     <div class="form-group col-md-4">
                         <input type="text" class="form-control" placeholder="Nombre del producto" name="txtNombre" id="txtNombre">
                             <div class="input-group-append">
@@ -108,31 +97,51 @@
                             </div>
                     </div>
 
-                    <div class="form-group col-md-4">
-                        <input type="text" class="form-control" placeholder="ID del proveedor" name="txtIDProveedor" id="txtIDProveedor">
-                            <div class="input-group-append">
-                                <div class="form-group col-md-6">
-                                </div>
-                            </div>
-                    </div>
+                    <div class="col-4">
+                        <select class="form-control" 
+                            id="cboProveedor" name="cboProveedor" size=1>
+                            <?php
+                                include 'conexionBD.php';
+                                $query1="SELECT IdProveedor, NombreProveedor FROM proveedor";
+                                $abrirCon = OpenCon();
+                                $res1= mysqli_query($abrirCon,$query1);
+                                echo "<option value='0'>Seleccione Proveedor</option>";
+                                while($row1 = mysqli_fetch_array($res1))
+                                {
+                                    echo "<option value=" . $row1["IdProveedor"] . ">" . $row1["NombreProveedor"] . "</option>";
+                                    
+                                }
+            
+                            ?>
 
-                    <div class="form-group col-md-4">
-                        <input type="number" class="form-control" placeholder="ID Estado del producto" name="txtIDEstado" id="txtIDEstado">
-                            <div class="input-group-append">
-                                <div class="form-group col-md-6">
-                                </div>
-                            </div>
-                    </div>
+                        </select>
+                            
+				    </div>	
+                    
+                    
 
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-4">
-                        <input type="number" class="form-control" placeholder="ID Categoria del producto" name="txtIDCatP" id="txtIDCatP">
-                            <div class="input-group-append">
-                                <div class="form-group col-md-6">
-                                </div>
-                            </div>
-                    </div>
+                <div class="col-4">
+                        <select class="form-control" 
+                            id="cboEstado" name="cboEstado" size=1>
+                            <?php
+                                
+                                $query2="SELECT IdEstado, NombreEstado FROM estadoproducto";
+                                $res2= mysqli_query($abrirCon,$query2);
+                                echo "<option value='0'>Seleccione Estado en Bodega</option>";
+                                while($row2 = mysqli_fetch_array($res2))
+                                {
+                                    echo "<option value=" . $row2["IdEstado"] . ">" . $row2["NombreEstado"] . "</option>";
+                                    
+                                }
+            
+                            ?>
+
+                        </select>
+                            
+                            
+				    </div>	
 
                     <div class="form-group col-md-4">
                         <input type="file" class="form-control" placeholder="Imagen" name="IMG" id="IMG">
