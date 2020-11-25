@@ -69,7 +69,7 @@
       </div>
     </div>
       <nav class="mt">
-        <button class="btn btn-primary" id="menu-toggle">X</button>
+       
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -127,7 +127,7 @@
             <div class="thumbnail">
                 <div class="caption">
                     <h4 class="list-group-item-heading"><?php echo $row["NombreProducto"]; ?></h4>
-                    <p class="list-group-item-text"><?php echo $row["IdCategoriaProducto"]; ?></p>
+                    
                     <img height="200px" src="data:image/jpg;base64,<?php echo base64_encode($row['Imagen']); ?>"/>
                     <div class="row">
                         <div class="col-md-6">
