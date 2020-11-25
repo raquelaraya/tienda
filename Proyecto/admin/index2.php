@@ -1,6 +1,8 @@
  <!DOCTYPE html>
 <html>
 <?php
+  include 'conexionBD.php';
+  $abirCon = OpenCon();
   session_start();
   if(isset($_REQUEST['sesion'])&& $_REQUEST['sesion']=="cerrar"){
 		session_destroy();
@@ -39,6 +41,8 @@
   <link href="css/EstilosSitio.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+
+  
 </head>
 
 <body>
@@ -84,6 +88,35 @@
               <li class="breadcrumb-item active">Inicio</li>
             </ol>
           </div>
+          <table class="table table-hover">
+          <tbody>
+            <?php
+              $query="SELECT IdProducto, NombreProducto, CantidadProducto, PrecioUnitario, Imagen FROM producto WHERE CantidadProducto>0 and IdEstadoProducto != 2";
+              $res=mysqli_query($abirCon,$query);
+              while($row=mysqli_fetch_assoc($res)){
+              ?>
+              
+              <tr>
+                        <td style="width: 300px;"><img height="200px" src="data:image/jpg;base64,<?php echo base64_encode($row['Imagen']); ?>"/></td>
+                        <td>
+                          <h2 class="card-title"><strong><?php echo $row['NombreProducto'] ?></strong></h2>
+                          <p class="card-text"><strong>Codigo: </strong><?php echo $row['IdProducto'] ?></p>
+                          <p class="card-text"><strong>Precio: </strong><?php echo $row['PrecioUnitario'] ?></p>
+                          <p class="card-text"><strong>Unidades Disponibles : </strong><?php echo $row['CantidadProducto'] ?></p>
+                          <a href="#" class="btn btn-primary" >Ver Detalles</a>
+              </td>
+                        
+                        
+                       
+
+              
+
+
+            <?php
+              }
+            ?>
+          </tboby>
+        </table>
         </div>
       </div>
      
