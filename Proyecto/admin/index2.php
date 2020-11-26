@@ -49,7 +49,7 @@
 <form action="" >
 
 
-  <div class="d-flex" id="wrapper">
+ <div class="d-flex" id="wrapper">
 
     <div class="bg-light border-right" id="sidebar-wrapper">
 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -74,6 +74,21 @@
    
 
       <nav class="mt">
+
+        
+        <button class="btn btn-primary" id="menu-toggle">≡</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><i class="fa fa-paper-plane-o"></i><span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
       </nav>
 
 
