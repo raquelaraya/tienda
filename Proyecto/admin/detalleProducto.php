@@ -2,7 +2,7 @@
     $id= mysqli_real_escape_string($abirCon,$_REQUEST['id']);
     $sqlProducto="call ConsultaProducto($id)";
     $detalle = $abirCon-> query($sqlProducto);
-    $row=mysqli_fetch_array($detalle)
+    $row=mysqli_fetch_array($detalle);
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -48,10 +48,11 @@
               </div>
 
               <div class="mt-4">
-                <div class="btn btn-primary btn-lg btn-flat">
+                <a href="index2.php?modulo=carrito&id=<?php echo $row['IdProducto'] ?>" class="btn btn-primary" >
                   <i class="fas fa-cart-plus fa-lg mr-2"></i> 
                   Añadir al Carrito
-                </div>
+                
+                </a>
               </div>
 
             </div>
@@ -65,3 +66,4 @@
       </div>
     </section>
   </div>
+
