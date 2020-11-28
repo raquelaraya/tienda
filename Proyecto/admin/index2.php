@@ -117,7 +117,7 @@
               </li>
               
               <li class="nav-item">
-                <a href="index2.php?modulo=miCarrito" class="nav-link <?php echo ($modulo=="miCarrito")? " active":" "?>">
+                <a href="index2.php?modulo=carrito" class="nav-link <?php echo ($modulo=="carrito")? " active":" "?>">
                     <i class="nav-icon fa fa-shopping-cart" aria-hidden="true"></i>
                   <p> Mi Carrito</p>
                 </a>
@@ -144,8 +144,8 @@
     if($modulo=="verProductos" || $modulo==""){
       include "verProductos.php";
     }
-    if($modulo=="miCarrito"){
-        include "miCarrito.php";
+    if($modulo=="carrito"){
+        include "carrito.php";
     }
     if($modulo=="detalleProducto"){
       include "detalleProducto.php";
