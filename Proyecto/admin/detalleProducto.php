@@ -2,7 +2,7 @@
     $id= mysqli_real_escape_string($abirCon,$_REQUEST['id']);
     $sqlProducto="call ConsultaProducto($id)";
     $detalle = $abirCon-> query($sqlProducto);
-    $row=mysqli_fetch_array($detalle);
+    $row=mysqli_fetch_array($detalle)
 ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -22,8 +22,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-12 col-sm-6">
-              <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
-              <div class="col-12">
+             <div class="col-12">
                  <img width="450" height="500" src="data:image/jpg;base64,<?php echo base64_encode($row['Imagen']); ?>"/>
               </div>
               <div class="col-12 product-image-thumbs">
@@ -48,11 +47,10 @@
               </div>
 
               <div class="mt-4">
-                <a href="index2.php?modulo=carrito&id=<?php echo $row['IdProducto'] ?>" class="btn btn-primary" >
+                <div class="btn btn-primary btn-lg btn-flat">
                   <i class="fas fa-cart-plus fa-lg mr-2"></i> 
                   Añadir al Carrito
-                
-                </a>
+                </div>
               </div>
 
             </div>
@@ -66,4 +64,3 @@
       </div>
     </section>
   </div>
-
