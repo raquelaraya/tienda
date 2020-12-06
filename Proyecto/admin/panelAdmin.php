@@ -65,7 +65,7 @@
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
       
-        <a class="nav-link"  href="miPerfil.php">
+        <a class="nav-link"  href="panelAdmin.php?modulo=miPerfil">
           <i class="far fa-user"></i>
         </a>
         <a class="nav-link"  href="panelAdmin.php?modulo=&sesion=cerrar" title="Cerrar Sesión">
@@ -204,6 +204,9 @@
     }
     if($modulo=="eliminarProducto"){
       include "eliminarProducto.php";
+    }
+    if($modulo=="miPerfil"){
+      include "miPerfil.php";
     }
   ?>
 </div>

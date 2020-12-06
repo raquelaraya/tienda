@@ -21,7 +21,7 @@
               <table class="table table-hover">
           <tbody>
             <?php
-
+       
               $query="SELECT IdProducto, NombreProducto, CantidadProducto, PrecioUnitario, Imagen FROM producto WHERE CantidadProducto>0 and IdEstadoProducto != 2";
               $abirCon = OpenCon();
               $res=mysqli_query($abirCon,$query);

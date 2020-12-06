@@ -11,9 +11,10 @@
         $IDProv = $_REQUEST['cboProveedor'];
         $IdEstadoProd = $_REQUEST['cboEstado'];
         $Img =  addslashes(file_get_contents($_FILES['IMG']['tmp_name']));
+        $Descripcion = $_REQUEST['txtDescripcion'];
 
-        $query="INSERT INTO producto (NombreProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,Imagen) 
-        VALUES ('".$Nombre."','".$Cantidad."','".$Precio."','". $IDProv."','". $IdEstadoProd."','".$Img."')";
+        $query="INSERT INTO producto (NombreProducto,DesProducto,CantidadProducto,PrecioUnitario,IdProveedor,IdEstadoProducto,Imagen) 
+        VALUES ('".$Nombre."','".$Descripcion."','".$Cantidad."','".$Precio."','". $IDProv."','". $IdEstadoProd."','".$Img."')";
         $res= mysqli_query($abrirCon,$query);
         if($res){
 
@@ -149,6 +150,15 @@
                                 <div class="form-group col-md-6">
                                 </div>
                             </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group col-md-6">
+                                <textarea class="form-control" placeholder="Descripción del producto" name="txtDescripcion" id="txtDescripcion"></textarea>
+                                <div class="input-group-append">
+                                    <div class="form-group col-md-6">
+                                    </div>
+                                </div>
                     </div>
                 </div>
                 <div class="row">

@@ -10,8 +10,9 @@
         $Precio =  $_REQUEST['txtPrecio'];
         $IDProv = $_REQUEST['cboProveedor'];
         $IdEstadoProd = $_REQUEST['cboEstado'];
+        $Descripcion = $_REQUEST['txtDescripcion'];
 
-        $query4="UPDATE producto SET NombreProducto='".$Nombre."',
+        $query4="UPDATE producto SET NombreProducto='".$Nombre."', DesProducto = '".$Descripcion."',
         CantidadProducto='".$Cantidad."',PrecioUnitario='".$Precio."', IdProveedor='".$IDProv."',
         IdEstadoProducto='".$IdEstadoProd."' WHERE IdProducto='".$IdProducto."'";
         $res4= mysqli_query($abirCon,$query4);
@@ -43,7 +44,7 @@
             }
         }
         $id= mysqli_real_escape_string($abirCon,$_REQUEST['id']);
-        $query1="SELECT IdProducto , NombreProducto, CantidadProducto, PrecioUnitario, IdProveedor, IdEstadoProducto, Imagen from producto WHERE IdProducto='".$id."'";
+        $query1="SELECT IdProducto , NombreProducto, DesProducto, CantidadProducto, PrecioUnitario, IdProveedor, IdEstadoProducto, Imagen from producto WHERE IdProducto='".$id."'";
         $res= mysqli_query($abirCon,$query1);
         $row= mysqli_fetch_assoc($res);
    
@@ -78,7 +79,7 @@
                 <div class="row">
                 <div class="form-group col-md-4">
                         <label>ID Producto</label>
-                        <input type="text" class="form-control" placeholder="ID del producto" name="txtId" id="txtId" value="<?php echo $row['IdProducto'] ?>">
+                        <input type="text" class="form-control" placeholder="ID del producto" name="txtId" id="txtId" value="<?php echo $row['IdProducto'] ?>" readonly>
                             <div class="input-group-append">
                                 <div class="form-group col-md-6">
                                 </div>
@@ -106,7 +107,8 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label>Precio Unitario</label>
-                        <input type="number" class="form-control" placeholder="Precio Unitario" name="txtPrecio" id="txtPrecio" value="<?php echo $row['PrecioUnitario'] ?>">
+                        <input type="number" class="form-control" placeholder="Precio Unitario" name="txtPrecio" id="txtPrecio" 
+                            value="<?php echo $row['PrecioUnitario'] ?>">
                             <div class="input-group-append">
                                 <div class="form-group col-md-6">
                                 </div>
@@ -171,6 +173,16 @@
                     <div class="form-group col-md-4">
                         <img height="200px" src="data:image/jpg;base64,<?php echo base64_encode($row['Imagen']); ?>"/>
                     </div>
+
+                    
+                    <div class="form-group col-md-6">
+                                <textarea class="form-control" name="txtDescripcion" id="txtDescripcion"> <?php echo $row['DesProducto'] ?></textarea>
+                                <div class="input-group-append">
+                                    <div class="form-group col-md-6">
+                                    </div>
+                                </div>
+                    </div>
+                </div>
 
                 </div>
                 <div class="row">
