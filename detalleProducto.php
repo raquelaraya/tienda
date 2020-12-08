@@ -40,9 +40,7 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-            <div class="alert alert-success">
-              <?php echo $mensaje; ?>
-            </div>
+            
         </div>
       </div><!-- /.container-fluid -->
     </section>

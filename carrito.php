@@ -36,14 +36,21 @@
             <tbody>
             <?php $total=0; ?>
             <?php foreach($_SESSION['Carrito'] as $indice=>$producto){ ?>
-                <td><?php echo $producto['Nombre'] ?></td>
-                <td><?php echo $producto['Cantidad'] ?></td>
-                <td><?php echo $producto['Precio'] ?></td>
-                <td><?php echo number_format($producto['Precio']*$producto['Cantidad'],2); ?></td>
-                <td><button class="btn btn-danger" type button>Eliminar del carrito</button></td>
-                <?php $total=$total+($producto['Precio']*$producto['Cantidad']); ?>
+    <td wIdProductoth="40%"><?php echo $producto['Nombre'] ?></td>
+    <td wIdProductoth="15%"><?php echo $producto['Cantidad'] ?></td>
+    <td wIdProductoth="20%"><?php echo $producto['Precio'] ?></td>
+    <td wIdProductoth="20%"><?php echo number_format($producto['Precio']*$producto['Cantidad'],2); ?></td>
+    <td wIdProductoth="5%">
+    <form action="" method="post">    <input type="hidden" name="id" id="id" value="echo <?php        
+ openssl_decrypt($_POST['ID'],COD,KEY);?>"> 
+
+         
+    <button class="btn btn-danger" type="submit"
+    name="btnAccion" value=" ">Eliminar del carrito</button>
+    </form></td>
+                
+            </tbody><?php $total=$total+($producto['Precio']*$producto['Cantidad']); ?>
             <?php }?>
-            </tbody>
             </table>
         <?php }else{?>
         <div class="alert alert-sucess">
@@ -79,3 +86,25 @@
         
     </div>
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
