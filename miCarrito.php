@@ -59,24 +59,30 @@ $abirCon = OpenCon();
                 $mensaje=print_r($_SESSION,true);
             break;
 
-            case 'Eliminar':
-                if(is_numeric(openssl_decrypt($_POST['id'],COD,KEY))){
-                    $ID=openssl_decrypt($_POST['id'],COD,KEY);
-                    foreach($_SESSION['Carrito'] as $indice=>$producto)
-                    { 
-                     if ($producto['ID']==$ID) {
-                        unset($_SESSION['Carrito'] [$indice]);
-                        echo "<script>alert('Elemento borrado');</script>";
-                        
+        case "Eliminar": 
+            if(is_numeric( openssl_decrypt($_POST['id'],COD,KEY ))){
+                    $ID=openssl_decrypt($_POST['id'],COD,KEY );
+                    
+                 foreach($_SESSION['Carrito'] as $indice=>$producto){
+                    if($producto['ID']==$ID){
+                        unset($_SESSION['Carrito'][$indice]);
+                        echo "<script>alert('Elemento borrado...');</script>";
+
                     }
-                }
 
 
-                }else{
-                    $mensaje.="Upss.... ID incorrecto".$ID."<br/>";
-                }
-                break;
+                 }   
 
-        }
+             }else{
+                 $mensaje.="Upss... ID incorrecto".$ID."<br/>";
+             }
+
+        break; 
+
+
     }
+
+
+}
+
 ?>

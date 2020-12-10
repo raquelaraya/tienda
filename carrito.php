@@ -22,43 +22,97 @@
               <div class="card-body">
               <div class="row px-5">
         <div class="col-md-7">
-        <?php if(!empty($_SESSION['Carrito'])){?>
-            <table class="table table-bordered table-hover">
-            <thead>
-                <tr>      
-                <th>Nombre</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Total</hr>
-                <th>Acciones</th>
-                </tr>          
-            </thead>
-            <tbody>
-            <?php $total=0; ?>
-            <?php foreach($_SESSION['Carrito'] as $indice=>$producto){ ?>
-    <td wIdProductoth="40%"><?php echo $producto['Nombre'] ?></td>
-    <td wIdProductoth="15%"><?php echo $producto['Cantidad'] ?></td>
-    <td wIdProductoth="20%"><?php echo $producto['Precio'] ?></td>
-    <td wIdProductoth="20%"><?php echo number_format($producto['Precio']*$producto['Cantidad'],2); ?></td>
-    <td wIdProductoth="5%">
-    <form action="" method="post">    <input type="hidden" name="id" id="id" value="echo <?php        
- openssl_decrypt($_POST['ID'],COD,KEY);?>"> 
-
-         
-    <button class="btn btn-danger" type="submit"
-    name="btnAccion" value=" ">Eliminar del carrito</button>
-    </form></td>
+        <br>
+<h3>Lista de productos</h3>
+<?php if(!empty($_SESSION['Carrito'])) { ?>
+<table class="table table-light table-bordered">
+    <tbody>
+        <tr>
+            <th width="40%">Descripción</th>
+            <th width="15%" class="text-center">Cantidad</th>
+            <th width="20%" class="text-center" >Precio</th>
+            <th width="20%" class="text-center" >Total</th>
+            <th width="5%">--</th>
+        </tr>
+        <?php $total=0; ?>
+        <?php foreach($_SESSION['Carrito'] as $indice=>$producto){?>
+        <tr>
+            <td width="40%"><?php echo $producto['Nombre']?></td>
+            <td width="15%" class="text-center"><?php echo $producto['Cantidad']?></td>
+            <td width="20%" class="text-center">$<?php echo $producto['Precio']?></td>
+            <td width="20%" class="text-center">$<?php echo number_format($producto['Precio']*$producto['Cantidad'],2); ?></td>
+            <td width="5%"> 
+            
+           <form action="" method="post">
                 
-            </tbody><?php $total=$total+($producto['Precio']*$producto['Cantidad']); ?>
-            <?php }?>
-            </table>
-        <?php }else{?>
-        <div class="alert alert-sucess">
-            No hay productos en el carrito
-        </div>
-        <?php }?>
-        </div>
-        <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
+            <input type="hidden" 
+            name="id" 
+            id="id" 
+            value="<?php echo  openssl_encrypt($producto['ID'],COD,KEY);?>">
+
+        <button 
+                class="btn btn-danger" 
+                type="submit"
+                name="btnAnadir"
+                value="Eliminar"
+                >Eliminar</button>
+
+            </form>
+            
+            
+             </td>
+        </tr>
+        <?php $total=$total+($producto['Precio']*$producto['Cantidad']); ?>
+        <?php } ?>
+        <tr>
+            <td colspan="3" align="right"><h3>Total</h3></td>
+            <td  align="right"><h3>$<?php echo number_format($total,2);?></h3></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <form action="pagar.php" method="post">
+             <div class="alert alert-success">
+             <div class="form-group">
+                        <label for="my-input">Correo de contacto:</label>
+                        <input id="email" name="email" 
+                        class="form-control" 
+                        type="email"
+                        placeholder="Por favor escribe tú correo"
+                        required>
+                    </div>
+                    <small id="emailHelp"
+                    class="form-text text-muted"
+                    >
+                    Los productos se enviarán a este correo.
+                    </small>
+                 
+             </div>
+                <button class="btn btn-primary btn-lg btn-block" type="submit"
+                name="btnAccion"
+                value="proceder">
+                Proceder a pagar >>
+                </button>
+            
+            </form>
+
+                
+
+            </td>
+        </tr>
+
+        
+    </tbody>
+</table>
+<?php }else{ ?>
+<div class="alert alert-success">
+    No hay productos en el carrito...
+</div>
+<?php }?>
+
+
+
+<div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
 
             <div class="pt-4">
                 <h6>Detalles del pago</h6>
