@@ -1,5 +1,7 @@
 
 
+
+
 <?php
 
 $abirCon = OpenCon();
@@ -50,6 +52,14 @@ $abirCon = OpenCon();
                     );
                     $_SESSION['Carrito'][0]=$producto;
                 }else{
+
+                    $idProductos = array_column($_SESSION['Carrito'],"ID");
+                    
+                    if(in_array($ID,$idProductos)){
+                        echo"<script>alert('El producto ya ha sido agregado al carrito');</script>";
+
+                    }else{
+                    
                     $numeroProductos=count($_SESSION['Carrito']);
                     $producto=array(
                         'ID'=> $ID,
@@ -58,7 +68,7 @@ $abirCon = OpenCon();
                         'Cantidad'=>$cantidad
                     );
                     $_SESSION['Carrito'][$numeroProductos]=$producto;
-                    
+                    }
                 }
                 $mensaje=print_r($_SESSION,true);
             break;
@@ -70,7 +80,10 @@ $abirCon = OpenCon();
                  foreach($_SESSION['Carrito'] as $indice=>$producto){
                     if($producto['ID']==$ID){
                         unset($_SESSION['Carrito'][$indice]);
-                        echo "<script>alert('Elemento borrado...');</script>";
+                        echo "<script> swal({
+                            
+                    
+                          }</script>";
 
                     }
 
