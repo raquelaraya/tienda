@@ -1,4 +1,9 @@
+<?php 
+include 'config.php';
+include 'miCarrito.php';
 
+
+?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">

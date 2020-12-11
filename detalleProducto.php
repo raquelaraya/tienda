@@ -17,20 +17,17 @@
         confirmButtonColor: 'green',
         confirmButtonText: 'Ok',
         closeOnConfirm: true
+
       },
 
         function (isConfirm) {
-            window.location.href = 'index2.php?modulo=carrito';
+            window.location.href = 'index2.php?modulo=verProductos';
 
         }
       ); </script>";
+     
     
     }
-    
-
-      
-  
-
     
 ?>
  
@@ -86,7 +83,7 @@
               <div class="col-4">
                 <label><b>Cantidad</b></label>
                   <input type="number" class="form-control" 
-                  id="txtCanComprar" name="txtCanComprar"/>
+                  id="txtCanComprar" name="txtCanComprar" />
               </div>
 
             <form action="" method="post">

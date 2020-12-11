@@ -1,5 +1,9 @@
+
+
 <?php
-$abirCon = OpenCon(); 
+
+$abirCon = OpenCon();
+ 
 
     $mensaje="";
 
