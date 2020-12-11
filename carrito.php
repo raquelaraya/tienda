@@ -4,6 +4,7 @@ include 'miCarrito.php';
 
 
 ?>
+<!-- Content Wrapper. Contains page content-->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -14,7 +15,6 @@ include 'miCarrito.php';
           </div>
         </div>
       </div><!-- /.container-fluid -->
-      
     </section>
 
     <!-- Main content -->
@@ -25,10 +25,7 @@ include 'miCarrito.php';
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-              <div class="row px-5">
-        <div class="col-md-7">
-        <br>
-<h3>Lista de productos</h3>
+              <h3>Lista de productos</h3>
 <?php if(!empty($_SESSION['Carrito'])) { ?>
 <table class="table table-light table-bordered">
     <tbody>
@@ -44,8 +41,8 @@ include 'miCarrito.php';
         <tr>
             <td width="40%"><?php echo $producto['Nombre']?></td>
             <td width="15%" class="text-center"><?php echo $producto['Cantidad']?></td>
-            <td width="20%" class="text-center">$<?php echo $producto['Precio']?></td>
-            <td width="20%" class="text-center">$<?php echo number_format($producto['Precio']*$producto['Cantidad'],2); ?></td>
+            <td width="20%" class="text-center">₡<?php echo $producto['Precio']?></td>
+            <td width="20%" class="text-center">₡<?php echo number_format($producto['Precio']*$producto['Cantidad'],2); ?></td>
             <td width="5%"> 
             
            <form action="" method="post">
@@ -71,7 +68,7 @@ include 'miCarrito.php';
         <?php } ?>
         <tr>
             <td colspan="3" align="right"><h3>Total</h3></td>
-            <td  align="right"><h3>$<?php echo number_format($total,2);?></h3></td>
+            <td  align="right"><h3>₡<?php echo number_format($total,2);?></h3></td>
             <td></td>
         </tr>
         <tr>
@@ -114,38 +111,34 @@ include 'miCarrito.php';
     No hay productos en el carrito...
 </div>
 <?php }?>
-
-
-
-<div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
-
-            <div class="pt-4">
-                <h6>Detalles del pago</h6>
-                <hr>
-                <div class="row price-details">
-                    <div class="col-md-6">
-                        
-                        <h6>Pago de envio</h6>
-                        <hr>
-                        <h6>Total a pagar</h6>
-                        
-                    </div>
-                    <div class="col-md-6">
-                        <h6></h6>
-                        <h6 class="text-success">FREE</h6>
-                        <hr>
-                        <h6> <?php $total ?></h6>
-                    </div>
-                       
-                </div>
-                <a class="btn btn-success btn-lg btn-block submitAndGoToCheckout" href=''>Finalizar Compra <span class="fa fa-check"></span></a>    
+              </div>
             </div>
-           
+          </div>
         </div>
-        
-    </div>
+      </div>
     </section>
+  </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
 
 
 
