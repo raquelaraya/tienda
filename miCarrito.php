@@ -1,7 +1,3 @@
-
-
-
-
 <?php
 
 $abirCon = OpenCon();
@@ -80,10 +76,7 @@ $abirCon = OpenCon();
                  foreach($_SESSION['Carrito'] as $indice=>$producto){
                     if($producto['ID']==$ID){
                         unset($_SESSION['Carrito'][$indice]);
-                        echo "<script> swal({
-                            
-                    
-                          }</script>";
+                        echo "<script> swal({}</script>";
 
                     }
 
@@ -95,6 +88,16 @@ $abirCon = OpenCon();
              }
 
         break; 
+
+
+
+
+
+
+
+
+
+        
 
 
     }

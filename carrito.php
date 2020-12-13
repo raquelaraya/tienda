@@ -1,8 +1,55 @@
-<?php 
-include 'config.php';
-include 'miCarrito.php';
+<?php
 
+    include 'config.php';
+    include 'micarrito.php';
+      
 
+    if(isset($_POST['btnAgregarR']))
+    {  
+        $Pnumero_de_ordenes = $_POST['numero_de_ordenes'];
+        $Ptotal = $_POST['total'];
+        $PNombre = $_POST['Nombre'];
+        $PApellido = $_POST['Apellido'];
+        $Ptarjeta = $_POST['tarjeta'];
+        $PFecha = $_POST['Fecha'];
+       
+        $sql2 = "call InsertarDatos($numero_de_orden,$total,$Nombre,$Apellido,$tarjeta,$Fecha)";
+        $abirCon->next_result();
+        
+        if($abirCon-> query($sql2))
+        {
+             echo "<script> swal({
+        title: 'Atención',
+        text: '¡Compra realizada con exito!',
+        type: 'success',
+        showCancelButton: false,
+
+        confirmButtonColor: 'green',
+        confirmButtonText: 'Ok',
+        closeOnConfirm: true
+
+      },
+
+        function (isConfirm) {
+            window.location.href = 'index2.php?modulo=verProductos';
+
+        }
+      ); </script>";
+           
+        } 
+        else
+        {
+            echo $abirCon -> error; 
+        }
+    }
+
+     CloseCon($abirCon);
+    
+  
+
+?>
+<?php
+$numero_de_orden = rand(0,100000); // with MAX_RAND=32768
 ?>
 <!-- Content Wrapper. Contains page content-->
 <div class="content-wrapper">
@@ -26,8 +73,8 @@ include 'miCarrito.php';
               <!-- /.card-header -->
               <div class="card-body">
               <h3>Lista de productos</h3>
-<?php if(!empty($_SESSION['Carrito'])) { ?>
-<table class="table table-light table-bordered">
+    <?php if(!empty($_SESSION['Carrito'])) { ?>
+    <table class="table table-light table-bordered">
     <tbody>
         <tr>
             <th width="40%">Descripción</th>
@@ -73,30 +120,80 @@ include 'miCarrito.php';
         </tr>
         <tr>
             <td colspan="5">
-            <form action="pagar.php" method="post">
-             <div class="alert alert-success">
-             <div class="form-group">
-                        <label for="my-input">Correo de contacto:</label>
-                        <input id="email" name="email" 
-                        class="form-control" 
-                        type="email"
-                        placeholder="Por favor escribe tú correo"
-                        required>
-                    </div>
-                    <small id="emailHelp"
-                    class="form-text text-muted"
-                    >
-                    Los productos se enviarán a este correo.
-                    </small>
-                 
-             </div>
-                <button class="btn btn-primary btn-lg btn-block" type="submit"
-                name="btnAccion"
-                value="proceder">
-                Proceder a pagar >>
-                </button>
+            <form  method="post">
+              <div class="container-fluid" style="margin-top:30px">
+        <div class = "card">
+          <div class ="card-header">
+            <h3 class="text-center">Formulario</h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+
+                <div class="col-3">
+                    <label>Número de orden</label>
+                    <input type="text" class="form-control" 
+                    id="numero_de_orden" name="numero_de_orden"   value="<?php echo $numero_de_orden;?>" readonly="true" />
+                </div>
+
+                <div class="col-3">
+                    <label>total a pagar</label>
+                    <input type="text" class="form-control" 
+                    id="total" name="total" value="<?php echo  $total; ?>" readonly="true" />
+                </div>
             
-            </form>
+                <div class="col-3">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" 
+                    id="Nombre" name="Nombre"  />
+                </div>  
+                
+                <div class="col-3">
+                    <label>Apellido</label>
+                    <input type="text" class="form-control" 
+                    id="Apellido" name="Apellido"  />
+                </div>  
+                
+                <div class="col-3">
+                    <label>Numero de tarjeta</label>
+                    <input type="text" class="form-control" 
+                    id="tarjeta" name="tarjeta"  />
+                </div>
+                
+                
+
+                 <div class="col-3">
+                    <label>Fecha de vencimineto</label>
+                    <input type="DATE" class="form-control" 
+                    id="Fecha" name="Fecha" />
+                </div>
+
+            </div>
+
+             <br/>
+
+            <div class="row">
+                <div class="col-12">
+                   <input type="submit" class="btn btn-success btn-block" 
+                    id="btnAgregarR" name="btnAgregarR"
+                value="AgregaCompra" />
+                </div>
+                <br></br>
+         <script
+              src="https://www.paypal.com/sdk/js?client-id=sb"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+         </script>
+
+         <div id="paypal-button-container"></div>
+
+         <script>
+              paypal.Buttons().render('#paypal-button-container');
+    // This function displays Smart Payment Buttons on your web page.
+        </script>
+            </div>
+            
+         </div>
+         </div>
+            
+         </form>
 
                 
 
@@ -117,7 +214,33 @@ include 'miCarrito.php';
         </div>
       </div>
     </section>
-  </div>
+
+       
+  <style>
+    
+    /* Media query for mobile viewport */
+    @media screen and (max-width: 400px) {
+        #paypal-button-container {
+            width: 100%;
+        }
+    }
+    
+    /* Media query for desktop viewport */
+    @media screen and (min-width: 400px) {
+        #paypal-button-container {
+            width: 250px;
+            display: inline-block;
+        }
+
+    }
+    
+</style>
+
+
+      
+
+
+  
 
 
 
