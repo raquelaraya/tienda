@@ -52,7 +52,13 @@ $abirCon = OpenCon();
                     $idProductos = array_column($_SESSION['Carrito'],"ID");
                     
                     if(in_array($ID,$idProductos)){
+<<<<<<< Updated upstream
                         echo"<script>alert('El producto ya ha sido agregado al carrito');   window.location.href = 'index2.php?modulo=verProductos';</script>";
+=======
+                        echo"<script>alert('El producto ya ha sido agregado al carrito');
+                        window.location.href='index2.php?modulo=verProductos'
+                        </script>";
+>>>>>>> Stashed changes
 
                     }else{
                     
@@ -64,9 +70,15 @@ $abirCon = OpenCon();
                         'Cantidad'=>$cantidad
                     );
                     $_SESSION['Carrito'][$numeroProductos]=$producto;
+
+                    echo'<script type="text/javascript">
+                    alert("Se agrego producto al carrito");
+                    window.location.href="index2.php?modulo=verProductos";
+                    </script>';;
+                      
                     }
                 }
-                $mensaje=print_r($_SESSION,true);
+                
             break;
 
         case "Eliminar": 

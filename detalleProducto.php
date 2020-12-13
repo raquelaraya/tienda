@@ -1,10 +1,13 @@
 <?php
     include 'config.php';
     include 'micarrito.php';
+
+    
     $id= mysqli_real_escape_string($abirCon,$_REQUEST['id']);
     $sqlProducto="call ConsultaProducto($id)";
     $detalle = $abirCon-> query($sqlProducto);
     $row=mysqli_fetch_array($detalle);
+<<<<<<< Updated upstream
   
     if(isset($_POST['btnAnadir'])){
      
@@ -32,6 +35,10 @@
      
    
     
+=======
+ 
+  
+>>>>>>> Stashed changes
 ?>
  
 <div class="content-wrapper">
