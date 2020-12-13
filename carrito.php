@@ -2,18 +2,18 @@
 
     include 'config.php';
     include 'micarrito.php';
-      
+    
 
     if(isset($_POST['btnAgregarR']))
     {  
-        $Pnumero_de_ordenes = $_POST['numero_de_ordenes'];
-        $Ptotal = $_POST['total'];
-        $PNombre = $_POST['Nombre'];
-        $PApellido = $_POST['Apellido'];
-        $Ptarjeta = $_POST['tarjeta'];
-        $PFecha = $_POST['Fecha'];
+        $PPnumero_de_ordenes = $_POST['numero_de_orden'];
+        $PPtotal = $_POST['total'];
+        $PPNombre = $_POST['Nombre'];
+        $PPApellido = $_POST['Apellido'];
+        $PPtarjeta = $_POST['tarjeta'];
+        $PPFecha = $_POST['Fecha'];
        
-        $sql2 = "call InsertarDatos($numero_de_orden,$total,$Nombre,$Apellido,$tarjeta,$Fecha)";
+        $sql2 = "call InsertarDatos('$numero_de_orden','$total','$Nombre','$Apellido','$tarjeta',$Fecha)";
         $abirCon->next_result();
         
         if($abirCon-> query($sql2))
@@ -120,11 +120,11 @@ $numero_de_orden = rand(0,100000); // with MAX_RAND=32768
         </tr>
         <tr>
             <td colspan="5">
-            <form  method="post">
+            <form  action="" method="post">
               <div class="container-fluid" style="margin-top:30px">
         <div class = "card">
           <div class ="card-header">
-            <h3 class="text-center">Formulario</h3>
+            <h3 class="text-center">Formulario de pago</h3>
           </div>
           <div class="card-body">
             <div class="row">
@@ -173,7 +173,7 @@ $numero_de_orden = rand(0,100000); // with MAX_RAND=32768
 
             <div class="row">
                 <div class="col-12">
-                   <input type="submit" class="btn btn-success btn-block" 
+                   <input type="submit" class="btn btn-success" 
                     id="btnAgregarR" name="btnAgregarR"
                 value="AgregaCompra" />
                 </div>
