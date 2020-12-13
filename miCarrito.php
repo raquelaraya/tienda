@@ -52,13 +52,7 @@ $abirCon = OpenCon();
                     $idProductos = array_column($_SESSION['Carrito'],"ID");
                     
                     if(in_array($ID,$idProductos)){
-<<<<<<< Updated upstream
-                        echo"<script>alert('El producto ya ha sido agregado al carrito');   window.location.href = 'index2.php?modulo=verProductos';</script>";
-=======
-                        echo"<script>alert('El producto ya ha sido agregado al carrito');
-                        window.location.href='index2.php?modulo=verProductos'
-                        </script>";
->>>>>>> Stashed changes
+header('refresh:0.50;url=verProductos.php');
 
                     }else{
                     

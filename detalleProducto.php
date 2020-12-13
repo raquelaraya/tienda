@@ -7,38 +7,13 @@
     $sqlProducto="call ConsultaProducto($id)";
     $detalle = $abirCon-> query($sqlProducto);
     $row=mysqli_fetch_array($detalle);
-<<<<<<< Updated upstream
+
   
-    if(isset($_POST['btnAnadir'])){
-     
-      echo "<script> swal({
-        title: 'Atención',
-        text: '¡Se agrego el producto al carrito!',
-        type: 'success',
-        showCancelButton: false,
-
-        confirmButtonColor: 'green',
-        confirmButtonText: 'Ok',
-        closeOnConfirm: false
-
-      },
-
-        function (isConfirm) {
-            window.location.href = 'index2.php?modulo=verProductos';
- 
-        }
-      ); </script>";
-     
-    
-    }
 
      
    
     
-=======
- 
-  
->>>>>>> Stashed changes
+
 ?>
  
 <div class="content-wrapper">
