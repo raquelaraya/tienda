@@ -5,7 +5,7 @@
     $sqlProducto="call ConsultaProducto($id)";
     $detalle = $abirCon-> query($sqlProducto);
     $row=mysqli_fetch_array($detalle);
-
+  
     if(isset($_POST['btnAnadir'])){
      
       echo "<script> swal({
@@ -16,19 +16,21 @@
 
         confirmButtonColor: 'green',
         confirmButtonText: 'Ok',
-        closeOnConfirm: true
+        closeOnConfirm: false
 
       },
 
         function (isConfirm) {
             window.location.href = 'index2.php?modulo=verProductos';
-
+ 
         }
       ); </script>";
      
     
     }
-    $abirCon = OpenCon();
+
+     
+   
     
 ?>
  
@@ -80,11 +82,7 @@
                 
               </div>
               </br>
-              <div class="col-4">
-                <label><b>Cantidad</b></label>
-                  <input type="number" class="form-control" 
-                  id="txtCanComprar" name="txtCanComprar" />
-              </div>
+              
 
             <form action="" method="post">
               <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($row['IdProducto'],COD,KEY)  ?>">

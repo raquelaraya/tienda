@@ -52,7 +52,7 @@ $abirCon = OpenCon();
                     $idProductos = array_column($_SESSION['Carrito'],"ID");
                     
                     if(in_array($ID,$idProductos)){
-                        echo"<script>alert('El producto ya ha sido agregado al carrito');</script>";
+                        echo"<script>alert('El producto ya ha sido agregado al carrito');   window.location.href = 'index2.php?modulo=verProductos';</script>";
 
                     }else{
                     
