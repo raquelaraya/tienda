@@ -8,12 +8,6 @@
     $detalle = $abirCon-> query($sqlProducto);
     $row=mysqli_fetch_array($detalle);
 
-  
-
-     
-   
-    
-
 ?>
  
 <div class="content-wrapper">
