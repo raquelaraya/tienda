@@ -4,38 +4,47 @@
     include 'micarrito.php';
     
 
-    if(isset($_POST['btnAgregarR']))
+    if(isset($_POST['btnFinalizar']))
     {  
-        $PPnumero_de_ordenes = $_POST['numero_de_orden'];
-        $PPtotal = $_POST['total'];
-        $PPNombre = $_POST['Nombre'];
-        $PPApellido = $_POST['Apellido'];
-        $PPtarjeta = $_POST['tarjeta'];
-        $PPFecha = $_POST['Fecha'];
-       
-        $sql2 = "call InsertarDatos('$numero_de_orden','$total','$Nombre','$Apellido','$tarjeta',$Fecha)";
-        $abirCon->next_result();
+        $usuario=$_SESSION['idUsuario'];
+        $queryVenta ="call InsertarVenta ($usuario)";
+        $tot = $_REQUEST['totPagar'];
+        $can =  $_REQUEST['totProduc'];
         
-        if($abirCon-> query($sql2))
+        $abirCon->next_result();
+        if($abirCon-> query($queryVenta))
         {
-             echo "<script> swal({
-        title: 'Atención',
-        text: '¡Compra realizada con exito!',
-        type: 'success',
-        showCancelButton: false,
+          $queryCon ="call ConsultaVenta()";
+          $res2= mysqli_query($abirCon,$queryCon);
+          $linea= mysqli_fetch_assoc($res2);
+          $idVenta = $linea['IdVenta'];
+       
 
-        confirmButtonColor: 'green',
-        confirmButtonText: 'Ok',
-        closeOnConfirm: true
+          $queryVenta ="call InsertaFactura($tot, $can, $idVenta)";
+        
+          $abirCon->next_result();
+          if($abirCon-> query($queryVenta))
+          {
+            echo "<script> swal({
+              title: 'Atención',
+              text: '¡Compra realizada con exito!',
+              type: 'success',
+              showCancelButton: false,
+      
+              confirmButtonColor: 'green',
+              confirmButtonText: 'Ok',
+              closeOnConfirm: true
+      
+            },
+      
+              function (isConfirm) {
+                  window.location.href = 'index2.php?modulo=verProductos';
+      
+              }
+            ); </script>";
+            unset($_SESSION['Carrito']);
 
-      },
-
-        function (isConfirm) {
-            window.location.href = 'index2.php?modulo=verProductos';
-
-        }
-      ); </script>";
-           
+          }
         } 
         else
         {
@@ -48,9 +57,7 @@
   
 
 ?>
-<?php
-$numero_de_orden = rand(0,100000); // with MAX_RAND=32768
-?>
+
 <!-- Content Wrapper. Contains page content-->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -84,6 +91,7 @@ $numero_de_orden = rand(0,100000); // with MAX_RAND=32768
             <th width="5%">--</th>
         </tr>
         <?php $total=0; ?>
+        <?php $tProductos=0; ?>
         <?php foreach($_SESSION['Carrito'] as $indice=>$producto){?>
         <tr>
             <td width="40%"><?php echo $producto['Nombre']?></td>
@@ -112,6 +120,7 @@ $numero_de_orden = rand(0,100000); // with MAX_RAND=32768
              </td>
         </tr>
         <?php $total=$total+($producto['Precio']*$producto['Cantidad']); ?>
+        <?php $tProductos= $tProductos+$producto['Cantidad']?>
         <?php } ?>
         <tr>
             <td colspan="3" align="right"><h3>Total</h3></td>
@@ -127,44 +136,33 @@ $numero_de_orden = rand(0,100000); // with MAX_RAND=32768
             <h3 class="text-center">Formulario de pago</h3>
           </div>
           <div class="card-body">
+          <input type="hidden" name="totPagar" id="totPagar" value="<?php echo $total ?>">
+          <input type="hidden" name="totProduc" id="totProduc" value="<?php echo $tProductos ?>">
             <div class="row">
-
                 <div class="col-3">
-                    <label>Número de orden</label>
-                    <input type="text" class="form-control" 
-                    id="numero_de_orden" name="numero_de_orden"   value="<?php echo $numero_de_orden;?>" readonly="true" />
-                </div>
-
-                <div class="col-3">
-                    <label>total a pagar</label>
-                    <input type="text" class="form-control" 
-                    id="total" name="total" value="<?php echo  $total; ?>" readonly="true" />
-                </div>
-            
-                <div class="col-3">
-                    <label>Nombre</label>
+                    <label>Nombre de Tajeta</label>
                     <input type="text" class="form-control" 
                     id="Nombre" name="Nombre"  />
                 </div>  
                 
                 <div class="col-3">
-                    <label>Apellido</label>
+                    <label>Número Tarjeta</label>
                     <input type="text" class="form-control" 
-                    id="Apellido" name="Apellido"  />
+                    id="tarjeta" name="tarjeta"  maxlength="20" required/>
                 </div>  
                 
                 <div class="col-3">
-                    <label>Numero de tarjeta</label>
-                    <input type="text" class="form-control" 
-                    id="tarjeta" name="tarjeta"  />
+                    <label>Código de Seguridad</label>
+                    <input type="password" class="form-control" 
+                    id="codigo" name="codigo"   maxlength="3" require/>
                 </div>
                 
                 
 
                  <div class="col-3">
                     <label>Fecha de vencimineto</label>
-                    <input type="DATE" class="form-control" 
-                    id="Fecha" name="Fecha" />
+                    <input type="month" class="form-control" 
+                    id="Fecha" name="Fecha" require/>
                 </div>
 
             </div>
@@ -174,20 +172,10 @@ $numero_de_orden = rand(0,100000); // with MAX_RAND=32768
             <div class="row">
                 <div class="col-12">
                    <input type="submit" class="btn btn-success" 
-                    id="btnAgregarR" name="btnAgregarR"
-                value="AgregaCompra" />
+                    id="btnFinalizar" name="btnFinalizar"
+                value="Finalizar Compra" />
                 </div>
                 <br></br>
-         <script
-              src="https://www.paypal.com/sdk/js?client-id=sb"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
-         </script>
-
-         <div id="paypal-button-container"></div>
-
-         <script>
-              paypal.Buttons().render('#paypal-button-container');
-    // This function displays Smart Payment Buttons on your web page.
-        </script>
             </div>
             
          </div>
@@ -218,21 +206,7 @@ $numero_de_orden = rand(0,100000); // with MAX_RAND=32768
        
   <style>
     
-    /* Media query for mobile viewport */
-    @media screen and (max-width: 400px) {
-        #paypal-button-container {
-            width: 100%;
-        }
-    }
     
-    /* Media query for desktop viewport */
-    @media screen and (min-width: 400px) {
-        #paypal-button-container {
-            width: 250px;
-            display: inline-block;
-        }
-
-    }
     
 </style>
 

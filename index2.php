@@ -124,6 +124,12 @@
                   ?>)</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="index2.php?modulo=misPedidos" class="nav-link <?php echo ($modulo=="misPedidos")? " active":" "?>">
+                <i class="nav-icon fa fa-shopping-bag" aria-hidden="true"></i>
+                  <p>Mis pedidos</p>
+                </a>
+              </li>
            </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -155,6 +161,10 @@
     if($modulo=="miPerfil"){
       include "miPerfilCliente.php";
     }
+    if($modulo=="misPedidos"){
+      include "misPedidos.php";
+    }
+
 
   ?>
 </div>

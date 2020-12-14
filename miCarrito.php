@@ -32,27 +32,46 @@ $abirCon = OpenCon();
                     $mensaje.="Upss.... precio incorrecto".$precio."<br/>";
                 }
 
-                if(is_numeric(openssl_decrypt($_POST['cantidad'],COD,KEY))){
-                    $cantidad=openssl_decrypt($_POST['cantidad'],COD,KEY);
+                if(is_numeric($_POST['cantidad'])){
+                    $cantidad=($_POST['cantidad']);
                     $mensaje.="OK cantidad".$cantidad."<br/>";
                 }else{
                     $mensaje.="Upss.... cantidad incorrecta".$cantidad."<br/>";
                 }
 
-                if(!isset($_SESSION['Carrito'])){
-                    $producto=array(
-                        'ID'=> $ID,
-                        'Precio'=>$precio,
-                        'Nombre'=>$nombre,
-                        'Cantidad'=>$cantidad
-                    );
-                    $_SESSION['Carrito'][0]=$producto;
+                if(!empty($_SESSION['Carrito'])){
+                    $idProductos = array_column($_SESSION['Carrito'],"ID");
+                    
+                    if(in_array($ID,$idProductos)){
+                        echo"<script>alert('El producto ya está en el carrito');
+                        window.location.href='index2.php?modulo=verProductos'
+                        </script>";
+
+                    }
+                    else{
+                        $numeroProductos=count($_SESSION['Carrito']);
+                        $producto=array(
+                            'ID'=> $ID,
+                            'Precio'=>$precio,
+                            'Nombre'=>$nombre,
+                            'Cantidad'=>$cantidad
+                        );
+                        $_SESSION['Carrito'][$numeroProductos]=$producto;
+                        echo'<script type="text/javascript">
+                        alert("Se agrego producto al carrito");
+                        window.location.href="index2.php?modulo=verProductos";
+                        </script>';  
+                    }
+                    
+                    
                 }else{
 
                     $idProductos = array_column($_SESSION['Carrito'],"ID");
                     
                     if(in_array($ID,$idProductos)){
-header('refresh:0.50;url=verProductos.php');
+                        echo"<script>alert('El producto ya está en el carrito');
+                        window.location.href='index2.php?modulo=verProductos'
+                        </script>";
 
                     }else{
                     
@@ -64,12 +83,12 @@ header('refresh:0.50;url=verProductos.php');
                         'Cantidad'=>$cantidad
                     );
                     $_SESSION['Carrito'][$numeroProductos]=$producto;
-
+                 
                     echo'<script type="text/javascript">
                     alert("Se agrego producto al carrito");
                     window.location.href="index2.php?modulo=verProductos";
-                    </script>';;
-                      
+                    </script>';
+                    
                     }
                 }
                 

@@ -7,7 +7,8 @@
     $sqlProducto="call ConsultaProducto($id)";
     $detalle = $abirCon-> query($sqlProducto);
     $row=mysqli_fetch_array($detalle);
-
+ 
+  
 ?>
  
 <div class="content-wrapper">
@@ -27,7 +28,8 @@
       <div class="container-fluid">
        <!-- Default box -->
        <div class="card card-solid">
-        <div class="card-body">
+        <div class="card-body" >
+        <form action="" method="post" >
           <div class="row"> 
             <div class="col-12 col-sm-6">
              <div class="col-12">
@@ -47,7 +49,7 @@
               <h4 class="mt-3"><small>Unidades Disponibles:</small></h4>
               <div class="col-2">
                   <input type="number" class="form-control" 
-                  id="txtComprar" name="txtComprar" value="<?php echo $row['CantidadProducto'] ?>" readonly/>
+                  id="txtDisponible" name="txtDisponible" value="<?php echo $row['CantidadProducto'] ?>" readonly/>
               </div>
              
 
@@ -60,14 +62,20 @@
               </br>
               
 
-            <form action="" method="post">
+            
+              <h4 class="mt-3"><small>Cantidad:</small></h4>
+              <div class="col-2">
+                  <input type="number" class="form-control" 
+                  id="cantidad" name="cantidad" />
+              </div>
+
               <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($row['IdProducto'],COD,KEY)  ?>">
               <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($row['NombreProducto'],COD,KEY)?>">
               <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($row['PrecioUnitario'],COD,KEY) ?>">
-              <input type="hidden" name="cantidad" id="cantidad" value="<?php echo openssl_encrypt(1,COD,KEY); ?>">
+             
 
-              <div class="mt-4">
-                  <button type="submit" class="btn btn-primary" name="btnAnadir" id="btnAnadir" value="Agregar">
+              <div class="mt-4" onmouseover="ValidarCampos()">
+                  <button type="submit" class="btn btn-primary" name="btnAnadir" id="btnAnadir" value="Agregar" >
                   <i class="fas fa-cart-plus fa-lg mr-2"></i> 
                   Añadir al Carrito
                   </button>
@@ -107,45 +115,21 @@
   </div>
 
 <script>
+    function DesactivaBoton(){
+      $('#btnAnadir').prop('disabled', true);
+    }
+    window.onload=DesactivaBoton;
+
   function ValidarCampos(){
+    var disponible = document.getElementById("txtDisponible").value;
+    var cantidadC = document.getElementById("cantidad").value;
 
-    if($("#txtCanComprar").val() <= 0){
-      swal({
-                title: 'Atención',
-                text: '¡La cantidad por comprar es incorrecta!',
-                type: 'error',
-                showCancelButton: false,
-        
-                confirmButtonColor: 'red',
-                confirmButtonText: 'Aceptar',
-                closeOnConfirm: true
-            },
 
-                function (isConfirm) {
-                   
-      
-                }
-            )
-      return false;
+    if(cantidadC <= disponible && cantidadC>0){
+      $('#btnAnadir').prop('disabled', false);
     }
-    if($("#txtCanComprar").val() > $("#txtComprar").val()){
-      swal({
-                title: 'Atención',
-                text: '¡No hay suficientes unidades!',
-                type: 'error',
-                showCancelButton: false,
-                confirmButtonColor: 'red',
-                confirmButtonText: 'Aceptar',
-                closeOnConfirm: true
-            },
-
-                function (isConfirm) {
-                   
-      
-                }
-            )
-      return false;
+    else{
+      $('#btnAnadir').prop('disabled', true);
     }
-    return true;
   }
 </script>

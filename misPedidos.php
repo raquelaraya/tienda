@@ -1,4 +1,4 @@
- <!-- Content Wrapper. Contains page content-->
+<!-- Content Wrapper. Contains page content-->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -24,23 +24,20 @@
                   <thead>
                     <tr>
                     <th>№ Factura</th>
-                    <th>Nombre Cliente</th>
                     <th>Total Compra</th>
-                    <th>Cantidad de Productos</th>
+                    <th>Cantidad de Productos Comprados</th>
                     <th>Fecha de compra</th>
                     </tr>          
                   </thead>
                 <tbody>
                   <?php
-                    include 'conexionBD.php';
-                    $abirCon = OpenCon();
-                    $query ="call todosPedidos()";
+                    $usuario=$_SESSION['idUsuario'];
+                    $query ="call misPedidos($usuario)";
                     $res= mysqli_query($abirCon,$query);
                     while($row= mysqli_fetch_assoc($res)){
                   ?>
                       <tr>
                         <td><?php echo $row['IdDetalle'] ?></td>
-                        <td><?php echo $row['NombreUsuario']." ". $row['ApellidoUsuario']?></td>
                         <td>₡<?php echo number_format ($row['Total'],2) ?></td>
                         <td><?php echo $row['CantidadProductos'] ?></td>
                         <td><?php echo $row['FechaCompra'] ?></td>
@@ -58,3 +55,31 @@
       </div>
     </section>
   </div>
+  <script>
+    function Eliminar(id){
+
+      swal({
+        title: 'Atención',
+        text: '¡Desea eliminar el producto!',
+        type: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        confirmButtonColor: 'red',
+        confirmButtonText: 'Sí',
+        closeOnConfirm: false,
+        closeOnCancel: true
+    },
+
+        function (isConfirm) {
+            if (isConfirm) {
+              
+            window.location.href = "panelAdmin.php?modulo=eliminarProducto&idBorrar="+id;
+            
+            }
+            
+        }
+      );
+
+    }
+
+    </script>
