@@ -55,31 +55,4 @@
       </div>
     </section>
   </div>
-  <script>
-    function Eliminar(id){
-
-      swal({
-        title: 'Atención',
-        text: '¡Desea eliminar el producto!',
-        type: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'No',
-        confirmButtonColor: 'red',
-        confirmButtonText: 'Sí',
-        closeOnConfirm: false,
-        closeOnCancel: true
-    },
-
-        function (isConfirm) {
-            if (isConfirm) {
-              
-            window.location.href = "panelAdmin.php?modulo=eliminarProducto&idBorrar="+id;
-            
-            }
-            
-        }
-      );
-
-    }
-
-    </script>
+  

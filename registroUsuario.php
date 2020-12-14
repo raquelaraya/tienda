@@ -12,7 +12,7 @@
        
         $query="INSERT INTO usuario (CedulaUsuario, NombreUsuario, ApellidoUsuario, 
         correoUsuario, passwordUsuario, idRol) 
-        VALUES ('".$cedula."', '".$nombre."', '".$apellido."', '".$correo."', '".$clave."', '1')";
+        VALUES ('".$cedula."', '".$nombre."', '".$apellido."', '".$correo."', '".$clave."', '2')";
         $res= mysqli_query($abirCon,$query);
         if($res){
 ?>
